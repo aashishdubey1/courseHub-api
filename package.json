@@ -4,12 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run src/index.ts"
+    "dev": "bun run --watch src/index.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/bun": "latest",
     "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.97"
   },
   "peerDependencies": {

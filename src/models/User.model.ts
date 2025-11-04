@@ -1,10 +1,11 @@
 import { Schema, model, Document } from "mongoose";
 import bcrypt from "bcrypt";
-interface IUser extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
   role: "STUDENT" | "INSTRUCTOR" | "ADMIN";
+  comparePassword(password: string): Promise<boolean>;
 }
 
 const userSchema = new Schema<IUser>(
@@ -25,10 +26,19 @@ const userSchema = new Schema<IUser>(
       required: true,
       trim: true,
       minLength: 6,
-      select: false,
+      select: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      transform: (doc, ret: any) => {
+        delete ret._id;
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
 );
 
 userSchema.pre("save", async function (next) {
