@@ -28,6 +28,11 @@ const userSchema = new Schema<IUser>(
       minLength: 6,
       select: true,
     },
+    role: {
+      type: String,
+      required: true,
+      default: "STUDENT",
+    },
   },
   {
     timestamps: true,
