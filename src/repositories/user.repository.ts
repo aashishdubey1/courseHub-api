@@ -8,4 +8,8 @@ export default class UserRepository {
   async create(data: Partial<IUser>) {
     return await User.create(data);
   }
+
+  async getAllUsers() {
+    return User.find();
+  }
 }

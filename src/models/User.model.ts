@@ -31,6 +31,7 @@ const userSchema = new Schema<IUser>(
     role: {
       type: String,
       required: true,
+      enum: ["STUDENT", "INSTRUCTOR", "ADMIN"],
       default: "STUDENT",
     },
   },
@@ -58,6 +59,6 @@ userSchema.methods.comparePassword = async function (
   return bcrypt.compare(password, this.password);
 };
 
-const User = model<IUser>("user", userSchema);
+const User = model<IUser>("User", userSchema);
 
 export default User;

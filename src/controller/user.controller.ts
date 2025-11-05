@@ -1,9 +1,14 @@
-import type { Request, Response } from "express";
+import { response, type Request, type Response } from "express";
 import UserRepository from "../repositories/user.repository";
 import jwt from "jsonwebtoken";
 import serverConfig from "../config/serverConfig";
 
 const userRepository = new UserRepository();
+
+export async function getAllUser(req: Request, res: Response) {
+  const allUsers = await userRepository.getAllUsers();
+  return allUsers;
+}
 
 export async function login(req: Request, res: Response) {
   const { email, password } = req.body;
