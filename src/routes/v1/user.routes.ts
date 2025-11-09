@@ -6,12 +6,11 @@ import {
   register,
   updateProfile,
 } from "../../controller/user.controller";
-import authToken from "../../middlewares/auth.middleware";
 
 const router = Router();
 
 router.get("/", getAllUser);
-router.post("/login", authToken, login);
+router.post("/login", login);
 router.post("/register", register);
 
 // ----------------have to implements------------------

@@ -10,9 +10,9 @@ import {
 const router = Router();
 
 router.get("/", getAllCourses); // public
-router.get("/:id", getCourseById); // pubic
+router.get("/:courseId", getCourseById); // pubic
 router.post("/", createCourse);
-router.patch("/:id", updateCourse);
-router.delete(":id", deleteCourse);
+router.patch("/:courseId", updateCourse);
+router.delete("/:courseId", deleteCourse);
 
 export default router;

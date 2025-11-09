@@ -1,4 +1,4 @@
-import { Document, Schema, model, type ObjectId } from "mongoose";
+import { Document, Schema, Types, model, type ObjectId } from "mongoose";
 
 export interface ICourses extends Document {
   title: string;
@@ -6,7 +6,7 @@ export interface ICourses extends Document {
   price: number;
   rating: number;
   ratingCount: number;
-  instructor: ObjectId;
+  instructor: Types.ObjectId;
   studentsEnrolled: number;
 }
 
