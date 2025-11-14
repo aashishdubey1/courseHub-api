@@ -3,12 +3,13 @@ import UserRepository from "../repositories/user.repository";
 import jwt from "jsonwebtoken";
 import serverConfig from "../config/serverConfig";
 import type { UserRegisterInput } from "../validation/users.schema";
+import { success } from "zod";
 
 const userRepository = new UserRepository();
 
 export async function getAllUser(req: Request, res: Response) {
   const allUsers = await userRepository.getAllUsers();
-  return allUsers;
+  res.status(200).json({ success: true, users: allUsers });
 }
 
 export async function login(req: Request, res: Response) {

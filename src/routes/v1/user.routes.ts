@@ -11,10 +11,12 @@ import {
   UserLoginSchema,
   UserRegisterSchema,
 } from "../../validation/users.schema";
+import { authorize } from "../../middlewares/authorize.middleware";
+import authToken from "../../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/", getAllUser);
+router.get("/", authToken, authorize("ADMIN"), getAllUser);
 router.post("/login", validateBody(UserLoginSchema), login);
 router.post("/register", validateBody(UserRegisterSchema), register);
 
