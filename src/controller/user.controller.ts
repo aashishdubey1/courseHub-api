@@ -2,6 +2,7 @@ import { response, type Request, type Response } from "express";
 import UserRepository from "../repositories/user.repository";
 import jwt from "jsonwebtoken";
 import serverConfig from "../config/serverConfig";
+import type { UserRegisterInput } from "../validation/users.schema";
 
 const userRepository = new UserRepository();
 
@@ -36,7 +37,7 @@ export async function login(req: Request, res: Response) {
 }
 
 export async function register(req: Request, res: Response) {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role } = req.body as UserRegisterInput;
 
   const existingUser = await userRepository.findByEmail(email);
 

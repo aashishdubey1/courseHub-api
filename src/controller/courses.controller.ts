@@ -6,9 +6,8 @@ const courseRepository = new CourseRepository();
 
 export async function createCourse(req: Request, res: Response) {
   const { title, description, price } = req.body;
-  const instructorId = req.user?.userId as string;
 
-  const instructorObjectId = new Types.ObjectId(instructorId);
+  const instructorObjectId = new Types.ObjectId(req.user?.userId);
 
   const course = await courseRepository.createCourse({
     title,
@@ -19,10 +18,12 @@ export async function createCourse(req: Request, res: Response) {
 
   if (!course)
     return res
-      .status(505)
-      .json({ success: false, message: "Error while creating course" });
+      .status(500)
+      .json({ success: false, message: "Failed to create course" });
 
-  res.status(201).json({ success: true, message: " Course created", course });
+  res
+    .status(201)
+    .json({ success: true, message: "Course created successfully", course });
 }
 
 export async function getAllCourses(req: Request, res: Response) {
@@ -33,8 +34,10 @@ export async function getAllCourses(req: Request, res: Response) {
 }
 
 export async function getCourseById(req: Request, res: Response) {
-  const courseId = req.params.courseId as string;
+  const courseId = new Types.ObjectId(req.params?.courseId);
   const course = await courseRepository.getCourseById(courseId);
+
+  console.log({ course });
 
   if (!course)
     return res.status(404).json({ success: false, message: "No course find" });
